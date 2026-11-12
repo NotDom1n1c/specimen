@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Specimen — file radiography</title>
+<meta name="description" content="Drop any file. Its own bytes become the object. Local analysis, nothing is uploaded.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Martian+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=13">
+</head>
+<body>
+<div class="app" id="app">
+
+  <header class="top">
+    <div class="mark">
+      <span class="word">Specimen</span>
+      <span class="sub">file radiography<br>lab · local only</span>
+    </div>
+    <div class="tag" id="tag">
+      <span class="tag-no" id="tagNo">No. ————</span>
+      <span class="tag-name" id="tagName">waiting for a specimen</span>
+      <span class="tag-meta" id="tagMeta"></span>
+    </div>
+    <nav class="actions">
+      <button class="act primary" id="btnOpen" title="Open a file (O)"><span>Open file</span></button>
+      <div class="samples" id="samples">
+        <button class="act" id="btnSamples" aria-expanded="false"><span>Samples</span></button>
+        <div class="menu" id="sampleMenu" role="menu"></div>
+      </div>
+      <button class="act" id="btnReport" title="Copy a markdown report"><span>Copy report</span></button>
+      <span class="fps" id="fps">— fps</span>
+    </nav>
+    <input type="file" id="file" hidden>
+  </header>
+
+  <aside class="col left">
+    <section class="fig" id="figId">
+      <h3><i>Fig. 1</i> Identity</h3>
+      <p class="verdict" id="verdict">—</p>
+      <dl class="kv" id="idList"></dl>
+    </section>
+    <section class="fig grow" id="figAnat">
+      <h3><i>Fig. 2</i> Anatomy <em id="anatCount"></em></h3>
+      <ol class="anat" id="anat"></ol>
+    </section>
+    <section class="fig" id="figFind">
+      <h3><i>Fig. 3</i> Findings <em id="findCount"></em></h3>
+      <ul class="finds" id="finds"></ul>
+    </section>
+  </aside>
+
+  <main class="stage" id="stage">
+    <canvas id="gl"></canvas>
+    <svg class="callouts" id="callouts"></svg>
+    <div class="views" id="views">
+      <button data-v="0" class="on"><b>1</b>Trigram cube</button>
+      <button data-v="1"><b>2</b>Coil</button>
+      <button data-v="2"><b>3</b>Terrain</button>
+    </div>
+    <p class="view-note" id="viewNote"></p>
+    <div class="legend" id="legend"></div>
+    <p class="hint">drag · rotate &nbsp; wheel · zoom &nbsp; R · reset</p>
+    <div class="nogl" id="nogl" hidden>WebGL2 is not available here. The analysis panels still work.</div>
+  </main>
+
+  <section class="strip" id="stripWrap">
+    <div class="strip-head">
+      <span><i>Fig. 0</i> Entropy along the file</span>
+      <span class="win" id="winLabel">drag to select a window</span>
+    </div>
+    <canvas id="strip"></canvas>
+  </section>
+
+  <section class="lower">
+    <div class="fig strings">
+      <h3><i>Fig. 8</i> Strings <em id="strCount"></em>
+        <input id="strFilter" placeholder="filter…" spellcheck="false" autocomplete="off">
+      </h3>
+      <div class="vlist" id="strList"><div class="vpad" id="strPad"></div></div>
+    </div>
+    <div class="fig log">
+      <h3><i>Fig. 9</i> Lab log</h3>
+      <ol class="loglines" id="log"></ol>
+    </div>
+  </section>
+
+  <aside class="col right">
+    <section class="fig" id="figHex">
+      <h3><i>Fig. 4</i> Under the window <em id="hexOff"></em></h3>
+      <pre class="hex" id="hex"></pre>
+    </section>
+    <section class="fig">
+      <h3><i>Fig. 5</i> Byte spectrum <em>file · window</em></h3>
+      <canvas id="hist" class="plot"></canvas>
+    </section>
+    <section class="fig">
+      <h3><i>Fig. 6</i> Neighbours <em>byte → next byte</em></h3>
+      <canvas id="digraph" class="plot square"></canvas>
+    </section>
+    <section class="fig">
+      <h3><i>Fig. 7</i> Composition</h3>
+      <div class="comp" id="comp"></div>
+      <dl class="kv small" id="compList"></dl>
+    </section>
+  </aside>
+
+  <div class="drop" id="drop" hidden>
+    <div class="drop-inner">
+      <span class="drop-word">Release to x-ray</span>
+      <span class="drop-sub">read in this tab · never uploaded</span>
+    </div>
+  </div>
+</div>
+
+<script src="app.js?v=13"></script>
+</body>
+</html>
